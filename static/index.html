@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Info</title>
+</head>
+<body>
+    <h1>Welcome!</h1>
+    <script>
+        // Obtém informações do usuário
+        // Gets user information
+        const userInfo = {
+            language: navigator.language || navigator.userLanguage,
+            device: navigator.userAgent,
+            screenWidth: window.screen.width,
+            screenHeight: window.screen.height,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            platform: navigator.platform,
+        };
+
+        // Envia informações para o servidor
+// Sends information to the server
+        fetch('/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userInfo),
+        })
+        .then(response => response.json())
+        .then(data => console.log(data));
+    </script>
+</body>
+</html>
